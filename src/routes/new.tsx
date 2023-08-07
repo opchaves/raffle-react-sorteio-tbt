@@ -2,13 +2,12 @@ import { Form, redirect } from "react-router-dom";
 import { Participant, createRaffle, getNewID } from "../data";
 import { useState } from "react";
 
-const initParticipants: Participant[] = [{ id: getNewID(), name: "" }];
-
 export default function NewRaffle() {
   const [rounds, setRounds] = useState(1);
   const [repeatWinner, setRepeatWinner] = useState(false);
-  const [participants, setParticipants] =
-    useState<Participant[]>(initParticipants);
+  const [participants, setParticipants] = useState<Participant[]>([
+    { id: getNewID(), name: "" },
+  ]);
 
   const addParticipant = () => {
     const newParticipant = { id: getNewID(), name: "" };
@@ -17,11 +16,9 @@ export default function NewRaffle() {
   };
 
   const updateParticipant = ({
-    id,
     value,
     index,
   }: {
-    id: string;
     value: string;
     index: number;
   }) => {
@@ -38,7 +35,11 @@ export default function NewRaffle() {
           <div className="block">
             <label>
               <span className="text-gray-700">Título</span>
-              <input type="text" name="title" className="mt-1 block w-full sm:w-80" />
+              <input
+                type="text"
+                name="title"
+                className="mt-1 block w-full sm:w-80"
+              />
             </label>
           </div>
           <div className="block">
@@ -76,11 +77,7 @@ export default function NewRaffle() {
                   className="mt-1 block w-full sm:w-80"
                   value={participant.name}
                   onChange={(e) =>
-                    updateParticipant({
-                      value: e.target.value,
-                      id: participant.id,
-                      index,
-                    })
+                    updateParticipant({ value: e.target.value, index })
                   }
                 />
               </label>
@@ -114,11 +111,13 @@ export async function action({ request }: { request: Request }) {
   const formData = await request.formData();
 
   const formParticipants = formData.getAll("participants[]");
-  const participants = formParticipants.map((name) => ({ name }));
+  const participants = formParticipants.map((val) => ({
+    name: val.toString(),
+  }));
 
   const raffle = await createRaffle({
     title: formData.get("title") as string,
-    repeatWinner: formData.get("repeatWinner") === "true",
+    repeatWinner: formData.get("repeatWinner") === "on",
     rounds: Number(formData.get("rounds")),
     participants,
   });

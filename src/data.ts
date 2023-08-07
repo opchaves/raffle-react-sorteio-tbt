@@ -46,7 +46,7 @@ export async function createRaffle(input: NewRaffle) {
     ...input,
     id,
     date: Date.now(),
-    currentRound: 0,
+    currentRound: 1,
     roundWinners: [],
   };
   await save(raffle);
