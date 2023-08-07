@@ -1,5 +1,5 @@
-import { useLoaderData, Link, Outlet } from "react-router-dom";
-import { Raffle, getRaffles } from "../data";
+import { Link, Outlet } from "react-router-dom";
+import { getRaffles } from "../data";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export async function loader() {
@@ -7,7 +7,7 @@ export async function loader() {
 }
 
 export default function Root() {
-  const raffles = useLoaderData() as Raffle[];
+  // const raffles = useLoaderData() as Raffle[];
 
   return (
     <div className="sm:flex">

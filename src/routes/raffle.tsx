@@ -33,7 +33,7 @@ export default function RafflePage() {
   const raffle = useLoaderData() as Raffle;
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(-1);
-  const [rounds, setRounds] = useState(raffle.rounds);
+  const [rounds] = useState(raffle.rounds);
   const [currentRound, setCurrentRound] = useState(raffle.currentRound);
   const [participants, setParticipants] = useState(
     getData(raffle.participants)
