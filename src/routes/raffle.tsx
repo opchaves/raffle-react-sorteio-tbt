@@ -8,26 +8,26 @@ type LoaderProps = {
 };
 
 const backgroundColors = [
-  "#ea580c",
-  "#65a30d",
-  "#dc2626",
-  "#0891b2",
-  "#c026d3",
+  "#64748b",
+  "#475569",
+  "#334155",
+  "#1e293b",
+  "#0f172a",
 ];
 const textColors = ["#ffffff"];
 const outerBorderColor = "#eeeeee";
 const outerBorderWidth = 10;
-const innerBorderColor = "#30261a";
-const innerBorderWidth = 0;
-const innerRadius = 0;
-const radiusLineColor = "#eeeeee";
-const radiusLineWidth = 8;
+const innerBorderColor = "#ffffff";
+const innerBorderWidth = 5;
+const innerRadius = 5;
+const radiusLineColor = "#ffffff";
+const radiusLineWidth = 3;
 const fontFamily = "Nunito";
 const fontWeight = "bold";
-const fontSize = 18;
+const fontSize = 22;
 const fontStyle = "normal";
-const textDistance = 60;
-const spinDuration = 0.5;
+const textDistance = 75;
+const spinDuration = 0.8;
 
 export default function RafflePage() {
   const raffle = useLoaderData() as Raffle;
@@ -36,7 +36,7 @@ export default function RafflePage() {
   const [rounds] = useState(raffle.rounds);
   const [currentRound, setCurrentRound] = useState(raffle.currentRound);
   const [participants, setParticipants] = useState(
-    getData(raffle.participants)
+    getData(raffle.participants),
   );
   const [particantToDelete, setParticipantToDelete] = useState<number>(-1);
   const [winners, setWinners] = useState<Participant[]>([]);
